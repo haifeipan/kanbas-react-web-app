@@ -1,0 +1,66 @@
+/* p#id-selector-2 {
+    background-color: yellow;
+    color: black;
+   }
+    */
+
+    .sidebar {
+        width: 80px;
+        background-color: black;
+        text-align: center;
+        padding: 10px;
+    }
+    
+    .sidebar a {
+        display: block;
+        color: white;
+        text-decoration: none;
+        padding: 8px 0;
+        margin: 8px 0;
+    }
+    
+    .sidebar a i {
+        font-size: 20px;
+        margin-bottom: 5px;
+    }
+    
+    .sidebar a.active {
+        background-color: white;
+        color: red;
+    }
+    
+       
+    .account-sidebar a {
+        text-decoration: none;
+        color: red;
+        display: block;
+        text-align: left;
+        padding: 15px 0;
+    }
+    
+    .account-sidebar {
+        width: 200px;
+        margin-left: 25px;
+    }
+
+
+    .save-button {
+        background-color: red;
+        color: white;
+        border: none;
+        padding: 3px 3px;
+        cursor: pointer;
+    }
+
+    .cancel-button {
+        background-color: gray;
+        color: white;
+        border: none;
+        padding: 3px 3px;
+        cursor: pointer;
+    }
+
+    .settings-link {
+        color: red;
+    }
+    
