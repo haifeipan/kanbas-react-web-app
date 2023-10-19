@@ -1,0 +1,9 @@
+.top-container {
+    display: flex;
+}
+
+.search {
+    margin-right: 10px;
+    width: 100px;
+    background-color: brown;
+}

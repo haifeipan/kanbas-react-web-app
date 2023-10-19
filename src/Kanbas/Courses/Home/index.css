@@ -1,0 +1,21 @@
+.horizontal-container {
+    display: flex; 
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.left-component {
+    width: 70%; 
+    padding-right: 3%;
+}
+
+.right-component {
+    width: 30%; 
+}
+
+
+@media (max-width: 1000px) {
+    .right-component {
+      display: none;
+    }
+  }

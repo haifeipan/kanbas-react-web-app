@@ -1,0 +1,28 @@
+.publish-container {
+    display: flex; 
+}
+
+.publish {
+    /* width: 30%;  */
+    background-color: gray;
+    margin-left: 20px;
+    margin-right: 5px;
+}
+
+.unpublish {
+    background-color: green;
+}
+
+
+  
+  .action-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .action-list-button {
+    color: black;
+    margin: 5px 0;
+    border-radius: 0;
+  }
+

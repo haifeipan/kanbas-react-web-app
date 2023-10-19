@@ -1,0 +1,19 @@
+.sidebar {
+    width: 85px; 
+    background: black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+  }
+  
+  .sidebar-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 10px; 
+    color: white; 
+  }
+  
+
+  .active-link { background: white; color: red; }
