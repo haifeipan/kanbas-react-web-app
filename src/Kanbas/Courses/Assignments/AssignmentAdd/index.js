@@ -16,7 +16,7 @@ import {
   initiateAssignment,
 } from '../assignmentsReducer';
 
-function AssignmentEditor() {
+function AssignmentAdd() {
   const { assignmentId } = useParams();
 
   // const assignment = db.assignments.find(
@@ -30,7 +30,11 @@ function AssignmentEditor() {
     (state) => state.assignmentsReducer.assignment
   );
 
-  const newAssignment = useSelector(
+//   const newAssignment = useSelector(
+//     (state) => state.assignmentsReducer.newAssignment
+//   );
+
+  let newAssignment = useSelector(
     (state) => state.assignmentsReducer.newAssignment
   );
 
@@ -45,6 +49,9 @@ function AssignmentEditor() {
     navigate(`/Kanbas/Courses/${courseId}/Assignments`);
   };
 
+  newAssignment = {...newAssignment, course: courseId}
+
+
   return (
     <div className='col-9'>
       <nav className='breadcrumb'>
@@ -53,7 +60,7 @@ function AssignmentEditor() {
           className='breadcrumb-item'
           style={{ color: 'red', textDecoration: 'none' }}
         >
-          {assignment.course}
+          {newAssignment.course}
         </Link>
         <span className='breadcrumb-arrow'>&rarr;</span>
 
@@ -66,7 +73,7 @@ function AssignmentEditor() {
         </Link>
         <span className='breadcrumb-arrow'>&rarr;</span>
 
-        <span className='breadcrumb-item active'>{assignment.name}</span>
+        <span className='breadcrumb-item active'>{newAssignment.name}</span>
       </nav>
       <div className='float-end' style={{ color: 'green' }}>
         <FontAwesomeIcon icon={faCheckToSlot} style={{ marginRight: 10 }} />
@@ -81,21 +88,22 @@ function AssignmentEditor() {
       <input
         type='text'
         // value='A1 - ENV + HTML'
-        value={assignment.name}
-
+        value={newAssignment.name}
+        // placeholder = "New assignment"
         id='assignmentName'
         onChange={(e) =>
-          dispatch(setAssignment({ ...assignment, name: e.target.value }))
+          dispatch(setNewAssignment({ ...newAssignment, name: e.target.value }))
         }
         className='form-control'
       />
       <br />
       <h6>Assignment Description</h6>
       <textarea
-        value={assignment.description}
+        value={newAssignment.description}
+        // placeholder = "New Description of the new assignment"
         onChange={(e) =>
           dispatch(
-            setAssignment({ ...assignment, description: e.target.value })
+            setNewAssignment({ ...newAssignment, description: e.target.value })
           )
         }
         cols='50'
@@ -226,11 +234,11 @@ function AssignmentEditor() {
             <b>Due</b>
             <input
               type='date'
-              // value='2022-10-17'
-              value={assignment.dueDate}
+            //   value='2023-05-15'
+              value={newAssignment.dueDate}
               onChange={(e) =>
                 dispatch(
-                  setAssignment({ ...assignment, dueDate: e.target.value })
+                  setNewAssignment({ ...newAssignment, dueDate: e.target.value })
                 )
               }
               className='form-control'
@@ -244,12 +252,12 @@ function AssignmentEditor() {
                 <b>Available from</b>
                 <input
                   type='date'
-                  // value='2023-10-17'
-                  value={assignment.availableFromDate}
+                //   value='2023-01-10'
+                  value={newAssignment.availableFromDate}
                   onChange={(e) =>
                     dispatch(
-                      setAssignment({
-                        ...assignment,
+                      setNewAssignment({
+                        ...newAssignment,
                         availableFromDate: e.target.value,
                       })
                     )
@@ -261,12 +269,12 @@ function AssignmentEditor() {
                 <b>Until</b>
                 <input
                   type='date'
-                  // value='2023-10-17'
-                  value={assignment.availableUntilDate}
+                //   value='2023-02-18'
+                  value={newAssignment.availableUntilDate}
                   onChange={(e) =>
                     dispatch(
-                      setAssignment({
-                        ...assignment,
+                      setNewAssignment({
+                        ...newAssignment,
                         availableUntilDate: e.target.value,
                       })
                     )
@@ -331,14 +339,16 @@ function AssignmentEditor() {
           to={`/Kanbas/Courses/${courseId}/Assignments`}
           style={{ marginRight: 20 }}
         >
-          <button 
-          className='btn btn-danger'
-          onClick={() => dispatch(updateAssignment(assignment))}
-          >Save</button>
+          <button
+            className='btn btn-primary'
+            onClick={() => dispatch(addNewAssignment(newAssignment))}
+          >
+            Save
+          </button>
         </Link>
       </div>
     </div>
   );
 }
 
-export default AssignmentEditor;
+export default AssignmentAdd;

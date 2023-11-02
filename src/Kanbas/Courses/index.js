@@ -12,13 +12,23 @@ import Sections from "./Settings/Sections";
 import Apps from"./Settings/Apps";
 import FeatureOptions from "./Settings/FeatureOptions";
 import Integrations  from "./Settings/Integrations";
+import AssignmentAdd from "./Assignments/AssignmentAdd";
 
 
-
-function Courses() {
+function Courses({ courses }) {
   const { courseId } = useParams();
+  // let { courseId } = useParams();
 
-  const course = db.courses.find((course) => course._id === courseId);
+
+  // const course = db.courses.find((course) => course._id === courseId);
+
+  // if (courseId === null) {
+  //   courseId = "RS101";
+  // }
+
+  const course = courses.find((course) => course._id === courseId);
+
+
 
   if (!course) {
     return (
@@ -38,6 +48,7 @@ function Courses() {
             <Route path="Home" element={<Home/>} />
             <Route path="Modules" element={<Modules/>} />
             <Route path="Assignments" element={<Assignments/>} />
+            <Route path="Assignments/Add" element={<AssignmentAdd/>} />
             <Route path="Assignments/:assignmentId"
                    element={<AssignmentEditor/>}/>
             <Route path="Grades" element={<Grades />} />
@@ -75,6 +86,7 @@ function Courses() {
             <Route path="Home" element={<Home/>} />
             <Route path="Modules" element={<Modules/>} />
             <Route path="Assignments" element={<Assignments/>} />
+            <Route path="Assignments/Add" element={<AssignmentAdd/>} />
             <Route path="Assignments/:assignmentId"
                    element={<AssignmentEditor/>}/>
             <Route path="Grades" element={<Grades />} />

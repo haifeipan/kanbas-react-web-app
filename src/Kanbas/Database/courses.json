@@ -10,32 +10,6 @@
 
     { "_id": "RS103",
       "name": "Spacecraft Design", "number": "RS4570", "startDate": "2023-01-10", "endDate": "2023-05-15"
-    },
-
-    { "_id": "RS101",
-    "name": "Accounting", "number": "RS4550", "startDate": "2023-01-10",
-    "endDate": "2023-05-15"
-  },
-  
-  { "_id": "RS102",
-    "name": "Finance", "number": "RS4560", "startDate": "2023-01-10", "endDate": "2023-05-15"
-  },
-
-  { "_id": "RS103",
-    "name": "Physics", "number": "RS4570", "startDate": "2023-01-10", "endDate": "2023-05-15"
-  },
-
-  { "_id": "RS101",
-  "name": "Math", "number": "RS4550", "startDate": "2023-01-10",
-  "endDate": "2023-05-15"
-},
-
-{ "_id": "RS102",
-  "name": "English", "number": "RS4560", "startDate": "2023-01-10", "endDate": "2023-05-15"
-},
-
-{ "_id": "RS103",
-  "name": "Risk Management", "number": "RS4570", "startDate": "2023-01-10", "endDate": "2023-05-15"
-}
+    } 
   ]
   
