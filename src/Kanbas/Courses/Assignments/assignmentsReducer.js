@@ -1,12 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
-import db from "../../Database";
+// import db from "../../Database";
 
 
 const initialState = {
-  assignments: db.assignments,
-  assignment: { name: "New assignment", course: "RS101", description: "New Description of the new assignment", availableFromDate: "2023-01-10", availableUntilDate: "2023-02-18", dueDate: "2023-05-15" },
+  // assignments: db.assignments,
+  assignments: [],
+  assignment: { title: "New assignment", course: "65510e70870c092d5441bc94", description: "New Description of the new assignment", availableFromDate: "2023-01-10", availableUntilDate: "2023-02-18", dueDate: "2023-05-15" },
   // newAssignment: { name: "New assignment", course: "RS101", description: "New Description of the new assignment", availableFromDate: "2023-01-10", availableUntilDate: "2023-02-18", dueDate: "2023-05-15" },
-  newAssignment: { name: "New assignment", course: "RS101", description: "New Description of the new assignment", availableFromDate: "2023-01-10", availableUntilDate: "2023-02-18", dueDate: "2023-05-15" },
+  newAssignment: { title: "New assignment", course: "65510e70870c092d5441bc94", description: "New Description of the new assignment", availableFromDate: "2023-01-10", availableUntilDate: "2023-02-18", dueDate: "2023-05-15" },
   isAdd:true
 };
 
@@ -15,10 +16,21 @@ const assignmentsSlice = createSlice({
   name: "assignments",
   initialState,
   reducers: {
+    setAssignments: (state, action) => {
+      state.assignments = action.payload;
+    },
+
     addNewAssignment: (state, action) => {
       state.assignments = [
-        { ...action.payload, _id: new Date().getTime().toString() },
-          ...state.assignments,
+        // { ...action.payload, _id: new Date().getTime().toString() },
+        //   ...state.assignments,
+
+        // ...state.assignments,
+        // { ...action.payload, _id: new Date().getTime().toString() }
+
+        ...state.assignments,
+        { ...action.payload}
+          
       ];
 
       // state.assignments = [
@@ -66,5 +78,5 @@ const assignmentsSlice = createSlice({
 
 
 export const { addNewAssignment, deleteAssignment,
-  updateAssignment, setAssignment, setNewAssignment, initiateAssignment } = assignmentsSlice.actions;
+  updateAssignment, setAssignment, setNewAssignment, initiateAssignment, setAssignments } = assignmentsSlice.actions;
 export default assignmentsSlice.reducer;

@@ -1,10 +1,9 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import db from '../../Database';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBook, faCheckToSlot } from '@fortawesome/free-solid-svg-icons';
 import { faPlus, faEllipsisH } from '@fortawesome/free-solid-svg-icons';
-import {useState } from 'react'; // 1. Import Modal and Button
 
 import './index.css';
 
@@ -17,12 +16,19 @@ import {
   setNewAssignment,
   initiateAssignment,
   addNewAssignment,
+  setAssignments,
 } from './assignmentsReducer';
 
-
+import * as client from './client';
 
 function Assignments() {
   const { courseId } = useParams();
+
+  useEffect(() => {
+    client
+      .findAssignmentsForCourse(courseId)
+      .then((assignments) => dispatch(setAssignments(assignments)));
+  }, [courseId]);
 
   const assignments = useSelector(
     (state) => state.assignmentsReducer.assignments
@@ -33,10 +39,10 @@ function Assignments() {
   const dispatch = useDispatch();
 
   // const assignments = db.assignments;
-  const courseAssignments = assignments.filter(
-    (assignment) => assignment.course === courseId
-  );
 
+  // const courseAssignments = assignments.filter(
+  //   (assignment) => assignment.course === courseId
+  // );
 
   // const history = useHistory();
 
@@ -47,12 +53,15 @@ function Assignments() {
   // };
 
   const handleDeleteConfirmation = (assignmentId) => {
-    const shouldDelete = window.confirm("Are you sure you want to delete?");
+    const shouldDelete = window.confirm('Are you sure you want to delete?');
     if (shouldDelete) {
-      dispatch(deleteAssignment(assignmentId));
+      // dispatch(deleteAssignment(assignmentId));
+
+      client.deleteAssignment(assignmentId).then((status) => {
+        dispatch(deleteAssignment(assignmentId));
+      });
     }
   };
-
 
   return (
     <div>
@@ -118,7 +127,7 @@ function Assignments() {
       </div>
 
       <div className='list-group mt-3'>
-        {courseAssignments.map((assignment) => (
+        {assignments.map((assignment) => (
           // <Link
           //   key={assignment._id}
           //   to={`/Kanbas/Courses/${courseId}/Assignments/${assignment._id}`}
@@ -136,7 +145,7 @@ function Assignments() {
               <div style={{ marginLeft: 30, marginRight: 50, width: 60000 }}>
                 <div>
                   <h4 className='card-title'>
-                    <b>{assignment.name}</b>
+                    <b>{assignment.title}</b>
                   </h4>
                 </div>
 
@@ -161,8 +170,6 @@ function Assignments() {
                       Edit
                     </button>
                   </Link>
-
-
                   <button
                     style={{ marginRight: 30 }}
                     className='btn btn-danger btn-sm'
@@ -171,11 +178,6 @@ function Assignments() {
                   >
                     Delete
                   </button>
-
-
-
-
-
                   <FontAwesomeIcon
                     icon={faCheckToSlot}
                     style={{ color: 'green' }}

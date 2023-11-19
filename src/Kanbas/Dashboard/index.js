@@ -32,7 +32,9 @@ const Dashboard = ({
             {courses.map((course) => (
               <Link
                 key={course._id}
-                to={`/Kanbas/Courses/${course._id}`}
+                to={`/Kanbas/Courses/${course._id.$oid}`}
+                // to={`/Kanbas/Courses/${course._id}`}
+                // to={`/Kanbas/Courses/1`}
                 className='list-group-item'
               >
                 <div class='row'>
@@ -55,7 +57,8 @@ const Dashboard = ({
                       className='btn btn-danger btn-sm'
                       onClick={(event) => {
                         event.preventDefault();
-                        deleteCourse(course._id);
+                        // deleteCourse(course._id);
+                        deleteCourse(course);
                       }}
                     >
                       Delete
@@ -126,7 +129,14 @@ const Dashboard = ({
             <button className='btn btn-success btn-sm' onClick={addNewCourse}>
               Add
             </button>
-            <button style = {{marginLeft:10}} className='btn btn-primary btn-sm' onClick={updateCourse}>
+            <button 
+            style = {{marginLeft:10}} 
+            className='btn btn-primary btn-sm' 
+            // onClick={updateCourse}
+            onClick={() => {
+              updateCourse(course);
+            }}
+            >
               Update
             </button>
           </div>

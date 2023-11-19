@@ -16,12 +16,26 @@ import {
   initiateAssignment,
 } from '../assignmentsReducer';
 
+import * as client from "../client";
+
+
 function AssignmentAdd() {
   const { assignmentId } = useParams();
 
   // const assignment = db.assignments.find(
   //   (assignment) => assignment._id === assignmentId
   // );
+
+  const handleAddAssignment = () => {
+    client.createAssignment(courseId, newAssignment).then((newAssignment) => {
+      dispatch(addNewAssignment(newAssignment));
+    });
+  };
+
+  // const handleAddAssignment = async () => {
+  //   const status = await client.createAssignment(courseId, newAssignment);
+  //   dispatch(addNewAssignment(newAssignment));
+  // };
 
   const assignments = useSelector(
     (state) => state.assignmentsReducer.assignments
@@ -49,7 +63,7 @@ function AssignmentAdd() {
     navigate(`/Kanbas/Courses/${courseId}/Assignments`);
   };
 
-  newAssignment = {...newAssignment, course: courseId}
+  // newAssignment = {...newAssignment, course: courseId}
 
 
   return (
@@ -88,11 +102,11 @@ function AssignmentAdd() {
       <input
         type='text'
         // value='A1 - ENV + HTML'
-        value={newAssignment.name}
+        value={newAssignment.title}
         // placeholder = "New assignment"
         id='assignmentName'
         onChange={(e) =>
-          dispatch(setNewAssignment({ ...newAssignment, name: e.target.value }))
+          dispatch(setNewAssignment({ ...newAssignment, title: e.target.value }))
         }
         className='form-control'
       />
@@ -341,7 +355,8 @@ function AssignmentAdd() {
         >
           <button
             className='btn btn-primary'
-            onClick={() => dispatch(addNewAssignment(newAssignment))}
+            // onClick={() => dispatch(addNewAssignment(newAssignment))}
+            onClick={() => handleAddAssignment(newAssignment)}
           >
             Save
           </button>

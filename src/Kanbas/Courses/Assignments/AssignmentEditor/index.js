@@ -15,9 +15,23 @@ import {
   setNewAssignment,
   initiateAssignment,
 } from '../assignmentsReducer';
+import * as client from "../client";
 
 function AssignmentEditor() {
   const { assignmentId } = useParams();
+
+  const handleUpdateAssignment = async () => {
+    const status = await client.updateAssignment(assignment);
+    // await client.updateAssignment(assignment);
+    dispatch(updateAssignment(assignment));
+  };
+
+
+  // const handleUpdateAssignment = () => {
+  //   client.updateAssignment(assignment).then((assignment) => {
+  //     dispatch(updateAssignment(assignment));
+  //   });
+  // };
 
   // const assignment = db.assignments.find(
   //   (assignment) => assignment._id === assignmentId
@@ -45,6 +59,9 @@ function AssignmentEditor() {
     navigate(`/Kanbas/Courses/${courseId}/Assignments`);
   };
 
+  // assignment = {...assignment, course: courseId}
+
+
   return (
     <div className='col-9'>
       <nav className='breadcrumb'>
@@ -66,7 +83,7 @@ function AssignmentEditor() {
         </Link>
         <span className='breadcrumb-arrow'>&rarr;</span>
 
-        <span className='breadcrumb-item active'>{assignment.name}</span>
+        <span className='breadcrumb-item active'>{assignment.title}</span>
       </nav>
       <div className='float-end' style={{ color: 'green' }}>
         <FontAwesomeIcon icon={faCheckToSlot} style={{ marginRight: 10 }} />
@@ -81,11 +98,11 @@ function AssignmentEditor() {
       <input
         type='text'
         // value='A1 - ENV + HTML'
-        value={assignment.name}
+        value={assignment.title}
 
         id='assignmentName'
         onChange={(e) =>
-          dispatch(setAssignment({ ...assignment, name: e.target.value }))
+          dispatch(setAssignment({ ...assignment, title: e.target.value }))
         }
         className='form-control'
       />
@@ -333,7 +350,9 @@ function AssignmentEditor() {
         >
           <button 
           className='btn btn-danger'
-          onClick={() => dispatch(updateAssignment(assignment))}
+          // onClick={() => dispatch(updateAssignment(assignment))}
+          onClick={() => handleUpdateAssignment(assignment)}
+
           >Save</button>
         </Link>
       </div>
